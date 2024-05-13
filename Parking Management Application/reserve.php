@@ -30,21 +30,24 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-            transition: box-shadow 0.3s ease-in-out;
+            opacity: 0; 
+            transform: translateY(50px); 
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out; 
         }
 
-        main:hover {
-            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        main.show {
+            opacity: 1; 
+            transform: translateY(0); 
         }
 
         h1 {
             text-align: center;
-            color: #FCC419; /* Yellow color */
+            color: #FCC419; 
         }
 
         form label {
             font-weight: bold;
-            color: #000; /* Black color */
+            color: #000; 
         }
 
         form input[type="text"],
@@ -60,14 +63,14 @@
         form input[type="text"]:focus,
         form select:focus {
             outline: none;
-            border-color: #FCC419; /* Yellow color */
+            border-color: #FCC419; 
         }
 
         form input[type="submit"] {
             width: 100%;
             padding: 10px;
-            background-color: #FCC419; /* Yellow color */
-            color: #000; /* Black color */
+            background-color: #FCC419; 
+            color: #000; 
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -84,7 +87,7 @@
     <header>
         <?php include("components/header.php")?>
     </header>
-    <main>
+    <main id="reservationForm" class="main"> 
         <h1>Parking Reservation Form</h1>
         <form action="submit_reservation.php" method="post">
             <div class="form-group">
@@ -114,5 +117,12 @@
     <footer>
         <?php include("components/footer.php")?>
     </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const reservationForm = document.getElementById('reservationForm');
+            reservationForm.classList.add('show');
+        });
+    </script>
 </body>
 </html>

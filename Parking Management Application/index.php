@@ -138,25 +138,25 @@
             }
         }
 
-        /* Add CSS animation for fade out */
+        
         @keyframes fadeOut {
             from {
                 opacity: 1;
-                transform: translateY(0); /* Start from original position */
+                transform: translateY(0);
             }
             to {
                 opacity: 0;
-                transform: translateY(-50px); /* Move slightly up */
+                transform: translateY(-50px); 
             }
         }
 
-        /* Apply animation to sections */
+        
         section {
             opacity: 0;
-            animation-fill-mode: both; /* Ensure elements maintain their final state */
+            animation-fill-mode: both; 
         }
 
-        /* Add transition to elements */
+       
         section {
             transition: opacity 0.5s ease-in-out;
         }
@@ -247,10 +247,10 @@
                 });
             }
 
-            // Initial check when page loads
+            
             fadeInElements();
 
-            // Check again on scroll
+            
             document.addEventListener("scroll", function() {
                 fadeInElements();
                 fadeOutElements();
