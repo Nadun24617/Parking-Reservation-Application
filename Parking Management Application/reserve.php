@@ -21,6 +21,12 @@
             line-height: 1.6;
             color: rgb(60, 58, 71);
             background-color: #f9f9f9; 
+        
+            background-image: url('images/reserve-background.jpg');
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center;
+        
         }
 
         main {
