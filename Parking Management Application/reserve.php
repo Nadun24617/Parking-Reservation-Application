@@ -130,5 +130,31 @@
             reservationForm.classList.add('show');
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Submit form via AJAX
+            $('form').submit(function(e){
+                e.preventDefault(); // Prevent form submission
+                $.ajax({
+                    url: 'submit_reservation.php',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response){
+                        if(response.success){
+                            alert(response.message); // Display success message
+                        } else {
+                            alert(response.message); // Display error message
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        alert('An error occurred while processing your request.'); // Display generic error message
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>

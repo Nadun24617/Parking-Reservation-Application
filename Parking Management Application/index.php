@@ -94,7 +94,7 @@
             text-align: center;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
             transition: transform 0.3s ease;
         }
 
@@ -211,13 +211,15 @@
         <div class="container">
             <header class="sub">
                 <p class="section-intro">Contact Us</p>
-                <p class="large">example1</p>
+                <p><b>Address: </b> Kandy city car park, Kandy <br>
+                    <b>Phone: </b>0812 922 321</p>
+
             </header>
-            <ul class="social-icons">
+            <!-- <ul class="social-icons">
                 <li><a href="#"><img src="path/to/image1.jpg" alt="icon1"></a>example2</li>
                 <li><a href="#"><img src="path/to/image2.jpg" alt="icon2"></a>example3</li>
                 <li><a href="#"><img src="path/to/image3.jpg" alt="icon3"></a>example4</li>
-            </ul>
+            </ul> -->
         </div>
     </section>
 
