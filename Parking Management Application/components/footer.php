@@ -38,6 +38,7 @@
         <span class="link">
             <a href="#">Home</a>
             <a href="#contact">Contact</a>
+            <a href="admin-login.php">Admin</a>
         </span>
       </div>
 </footer>

@@ -1,282 +1,159 @@
+<?php
+// Establishing a connection to the database
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "parking reservation system"; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Delete function
+if(isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "DELETE FROM reservations WHERE id = $id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Record deleted successfully";
+    } else {
+        echo "Error deleting record: " . $conn->error;
+    }
+}
+
+// Fetching data from the database
+$sql = "SELECT * FROM reservations";
+$result = $conn->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/font/material-design-icons/Material-Design-Icons.woff'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Admin dashboard</title>
     <style>
-        header,
-        main,
-        footer {
-        padding-left: 240px;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-        @media only screen and (max-width: 992px) {
-        header,
-        main,
-        footer {
-            padding-left: 0;
-        }
-        }
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        #credits li,
-        #credits li a {
-        color: white;
-        }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
-        #credits li a {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th, table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    table th {
+        background-color: #f5f5f5;
         font-weight: bold;
-        }
+        color: #333;
+    }
 
-        .footer-copyright .container,
-        .footer-copyright .container a {
-        color: #BCC2E2;
-        }
+    table td {
+        color: #666;
+    }
 
-        .fab-tip {
-        position: fixed;
-        right: 85px;
-        padding: 0px 0.5rem;
-        text-align: right;
-        background-color: #323232;
-        border-radius: 2px;
-        color: #FFF;
-        width: auto;
-        }
-    </style>
+    table tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .delete-btn {
+        padding: 8px 15px;
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .delete-btn:hover {
+        background-color: #c0392b;
+    }
+</style>
 </head>
 <body>
-<ul id="slide-out" class="side-nav fixed z-depth-2">
-<li class="center no-padding">
-  <div class="indigo darken-2 white-text" style="height: 180px;">
-    <div class="row">
-      <img style="margin-top: 5%;" width="100" height="100" src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463990208/photo_dkkrxc.png" class="circle responsive-img" />
 
-      <p style="margin-top: -13%;">
-        Municipal Council Car Park
-      </p>
-    </div>
-  </div>
-</li>
-
-<li id="dash_dashboard"><a class="waves-effect" href="#!"><b>Dashboard</b></a></li>
-
-<ul class="collapsible" data-collapsible="accordion">
-  <li id="dash_users">
-    <div id="dash_users_header" class="collapsible-header waves-effect"><b>Parking Slots</b></div>
-    <div id="dash_users_body" class="collapsible-body">
-      <ul>
-        <li id="available">
-          <a class="waves-effect" style="text-decoration: none;" href="#!">Available Slots</a>
-        </li>
-
-        <li id="reserved">
-          <a class="waves-effect" style="text-decoration: none;" href="#!">Reserved Slots</a>
-        </li>
-      </ul>
-    </div>
-  </li>
-
-  
-
-
-  
-</ul>
-</ul>
-
-<header>
-<ul class="dropdown-content" id="user_dropdown">
-  <li><a class="indigo-text" href="#!">Profile</a></li>
-  <li><a class="indigo-text" href="#!">Logout</a></li>
-</ul>
-
-
-
-<nav>
-  <div class="nav-wrapper indigo darken-2">
-    <a style="margin-left: 20px;" class="breadcrumb" href="#!">Admin</a>
-    <a class="breadcrumb" href="#!">Index</a>
-
-    <div style="margin-right: 20px;" id="timestamp" class="right"></div>
-  </div>
-</nav>
-</header>
-
-<main>
-<div class="row">
-  <div class="col s6">
-    <div style="padding: 35px;" align="center" class="card">
-      <div class="row">
-        <div class="left card-title">
-          <b>User Management</b>
-        </div>
-      </div>
-
-      <div class="row">
-        <a href="#!">
-          <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-            <i class="indigo-text text-lighten-1 large material-icons">person</i>
-            <span class="indigo-text text-lighten-1"><h5>Seller</h5></span>
-          </div>
-        </a>
-        <div class="col s1"> </div>
-        <div class="col s1"> </div>
-
-        <a href="#!">
-          <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-            <i class="indigo-text text-lighten-1 large material-icons">people</i>
-            <span class="indigo-text text-lighten-1"><h5>Customer</h5></span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col s6">
-    <div style="padding: 35px;" align="center" class="card">
-      <div class="row">
-        <div class="left card-title">
-          <b>Product Management</b>
-        </div>
-      </div>
-      <div class="row">
-        <a href="#!">
-          <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-            <i class="indigo-text text-lighten-1 large material-icons">store</i>
-            <span class="indigo-text text-lighten-1"><h5>Product</h5></span>
-          </div>
-        </a>
-
-        <div class="col s1"> </div>
-        <div class="col s1"> </div>
-
-        <a href="#!">
-          <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-            <i class="indigo-text text-lighten-1 large material-icons">assignment</i>
-            <span class="indigo-text text-lighten-1"><h5>Orders</h5></span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col s6">
-    <div style="padding: 35px;" align="center" class="card">
-      <div class="row">
-        <div class="left card-title">
-          <b>Brand Management</b>
-        </div>
-      </div>
-
-      <div class="row">
-        <a href="#!">
-          <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-            <i class="indigo-text text-lighten-1 large material-icons">local_offer</i>
-            <span class="indigo-text text-lighten-1"><h5>Brand</h5></span>
-          </div>
-        </a>
-
-        <div class="col s1"> </div>
-        <div class="col s1"> </div>
-
-        <a href="#!">
-          <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-            <i class="indigo-text text-lighten-1 large material-icons">loyalty</i>
-            <span class="indigo-text text-lighten-1"><h5>Sub Brand</h5></span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col s6">
-    <div style="padding: 35px;" align="center" class="card">
-      <div class="row">
-        <div class="left card-title">
-          <b>Category Management</b>
-        </div>
-      </div>
-      <div class="row">
-        <a href="#!">
-          <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-            <i class="indigo-text text-lighten-1 large material-icons">view_list</i>
-            <span class="indigo-text text-lighten-1"><h5>Category</h5></span>
-          </div>
-        </a>
-        <div class="col s1"> </div>
-        <div class="col s1"> </div>
-
-        <a href="#!">
-          <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-            <i class="indigo-text text-lighten-1 large material-icons">view_list</i>
-            <span class="truncate indigo-text text-lighten-1"><h5>Sub Category</h5></span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
-  <a class="btn-floating btn-large pink waves-effect waves-light">
-    <i class="large material-icons">add</i>
-  </a>
-
-  <ul>
-    <li>
-      <a class="btn-floating red"><i class="material-icons">note_add</i></a>
-      <a href="" class="btn-floating fab-tip">Add a note</a>
-    </li>
-
-    <li>
-      <a class="btn-floating yellow darken-1"><i class="material-icons">add_a_photo</i></a>
-      <a href="" class="btn-floating fab-tip">Add a photo</a>
-    </li>
-
-    <li>
-      <a class="btn-floating green"><i class="material-icons">alarm_add</i></a>
-      <a href="" class="btn-floating fab-tip">Add an alarm</a>
-    </li>
-
-    <li>
-      <a class="btn-floating blue"><i class="material-icons">vpn_key</i></a>
-      <a href="" class="btn-floating fab-tip">Add a master password</a>
-    </li>
-  </ul>
-</div>
-</main>
-
-<footer class="indigo page-footer">
 <div class="container">
-  <div class="row">
-    <div class="col s12">
-      <h5 class="white-text">Icon Credits</h5>
-      <ul id='credits'>
-        <li>
-          Gif Logo made using <a href="https://formtypemaker.appspot.com/" title="Form Type Maker">Form Type Maker</a> from <a href="https://github.com/romannurik/FORMTypeMaker" title="romannurik">romannurik</a>
-        </li>
-        <li>
-          Icons made by <a href="https://material.io/icons/">Google</a>, available under <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License Version 2.0</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+    <h1>Parking Management System - Reservations</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vehicle Number</th>
+                <th>Customer Name</th>
+                <th>Mobile Number</th>
+                <th>Vehicle Type</th>
+                <th>Slot Number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Loop through each row of data
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['vehicle_number'] . "</td>";
+                    echo "<td>" . $row['customer_name'] . "</td>";
+                    echo "<td>" . $row['mobile_number'] . "</td>";
+                    echo "<td>" . $row['vehicle_type'] . "</td>";
+                    echo "<td>" . $row['slot_number'] . "</td>";
+                    echo "<td><button class='delete-btn' data-id='" . $row['id'] . "'>Delete</button></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='7'>No reservations found</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 </div>
-<div class="footer-copyright">
-  <div class="container">
-     <span>Made By <a style='font-weight: bold;' href="https://github.com/piedcipher" target="_blank">Tirth Patel</a></span>
-  </div>
-</div>
-</footer>
-<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'></script>
-<script src="script.js"></script>
+
+<script>
+    // JavaScript to handle delete button click
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            let id = this.getAttribute('data-id');
+            if (confirm("Are you sure you want to delete this reservation?")) {
+                window.location.href = 'admin-dashboard.php?action=delete&id=' + id;
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
+
+<?php
+// Closing the database connection
+$conn->close();
+?>
