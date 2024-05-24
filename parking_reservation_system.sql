@@ -38,11 +38,31 @@ CREATE TABLE `reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `email` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
 -- Dumping data for table `reservations`
 --
 
 INSERT INTO `reservations` (`id`, `vehicle_number`, `customer_name`, `mobile_number`, `vehicle_type`, `slot_number`, `email_address`) VALUES
 (20, 'KD-4469', 'nadun', '0719634646', 'Car', '1', 'nadunwasala123@gmail.com');
+
+--
+-- Dumping data for table `users`
+--
+
+-- Note: Use PHP or another method to generate a hashed password.
+-- Example: password_hash('password123', PASSWORD_BCRYPT);
+
+INSERT INTO `users` (`email`, `password`) VALUES
+('test@example.com', '$2y$10$eW5Wc5VOM5m2oWx5Wm1wZ.vZ9F0t9GfpTkItZJ/2/j1zM1FXplU5G'); -- 'password123' hashed
 
 --
 -- Indexes for dumped tables
