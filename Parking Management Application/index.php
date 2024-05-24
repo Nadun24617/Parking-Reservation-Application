@@ -66,7 +66,7 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             color: #fff;
         }
 
@@ -78,12 +78,11 @@
         }
 
         h1.sub {
-            margin-top: 20px;
+            margin-top: 10px;
             color: #fff;
         }
 
         .btn {
-            margin-top: 30px;
             padding: 15px 30px;
             background-color: #FCC419;
             color: #fff;
