@@ -6,7 +6,7 @@
     <title>Kandy Municipal Car Park</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&family=Squada+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -15,20 +15,20 @@
         }
 
         html {
-            font-size: 18px;
+            font-size: 16px;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Nunito', sans-serif;
             line-height: 1.6;
-            color: rgb(60, 58, 71);
-            background-color: #f9f9f9;
+            color: #333;
+            background-color: #f4f4f4;
         }
 
         header {
             background: #333;
             color: #fff;
-            padding: 10px 0;
+            padding: 20px 0;
             text-align: center;
         }
 
@@ -37,7 +37,7 @@
             justify-content: center;
             gap: 20px;
             background: #444;
-            padding: 10px 0;
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -51,7 +51,7 @@
         }
 
         nav a:hover {
-            color: #FCC419;
+            color: #FFD700;
         }
 
         #home {
@@ -66,65 +66,83 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
-            padding: 25px;
+            padding: 20px;
             color: #fff;
         }
 
         #home p.heading {
-            font-size: 5rem;
-            margin-top: 0px;
-            color: #FCC419;
+            font-size: 4rem;
+            margin-top: 0;
+            color: #FFD700;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         h1.sub {
-            margin-top: 10px;
+            margin-top: 20px;
             color: #fff;
         }
 
         .btn {
+            margin-top: 20px;
             padding: 15px 30px;
-            background-color: #FCC419;
+            background: linear-gradient(145deg, #FFD700, #FFA500);
             color: #fff;
             border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.5s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .btn:hover::before {
+            transform: translate(-50%, -50%) scale(1);
         }
 
         .btn:hover {
-            background-color: #e0ac22;
             transform: translateY(-3px);
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
         }
 
         .btn-secondary {
-            background-color: #ff5722;
+            background: linear-gradient(145deg, #ff7043, #ff5722);
         }
 
         .btn-secondary:hover {
-            background-color: #e64a19;
+            background: linear-gradient(145deg, #ff5722, #ff7043);
         }
 
         p.section-intro {
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: #333;
+            color: #555;
             margin-bottom: 20px;
             text-align: center;
         }
 
         .container {
             width: 90%;
-            margin: 0 auto;
+            margin: 40px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
 
@@ -146,7 +164,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: #f7f7f7;
+            background-color: #fafafa;
         }
 
         .gallery div:hover {
@@ -171,7 +189,7 @@
         .social-icons img {
             padding: 10px;
             border-radius: 50%;
-            background-color: #FCC419;
+            background-color: #FFD700;
             transition: transform 0.3s ease;
         }
 
@@ -251,7 +269,7 @@
     </section>
 
     <footer>
-         <?php include("components/footer.php")?>
+        <?php include("components/footer.php")?>
     </footer>
 
     <script>
