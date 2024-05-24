@@ -82,20 +82,31 @@
             color: #fff;
         }
 
-        #btn-reserve {
+        .btn {
             margin-top: 30px;
-            padding: 12px 24px;
+            padding: 15px 30px;
             background-color: #FCC419;
             color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
 
-        #btn-reserve:hover {
+        .btn:hover {
             background-color: #e0ac22;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: #ff5722;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e64a19;
         }
 
         p.section-intro {
@@ -214,8 +225,8 @@
     <section id="home">
         <p class="heading">No More Waiting</p>
         <h1 class="sub">Parking Slot is in Your Fingers</h1>
-        <button id="btn-reserve" onclick="window.location.href='reserve.php';">Reserve Your Parking</button>
-        <a href="" style="color: #FCC419; margin-top: 15px; display: inline-block;">Already Reserved parking</a>
+        <button class="btn" onclick="window.location.href='reserve.php';">Reserve Your Parking</button>
+        <button class="btn btn-secondary" onclick="window.location.href='already_reserved.php';">Already Reserved Parking</button>
     </section>
 
     <section id="services" class="fade-in">
