@@ -22,7 +22,31 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: rgb(60, 58, 71);
-            background-color: #f9f9f9; 
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #FCC419;
         }
 
         #home {
@@ -35,26 +59,29 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 105vh;
-            text-align: center; 
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+            color: #fff;
         }
 
         #home p.heading {
             font-size: 5rem;
             margin-top: 0px;
             color: #FCC419;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         h1.sub {
             margin-top: 20px;
-            color: white;
+            color: #fff;
         }
 
         #btn-reserve {
             margin-top: 30px;
-            padding: 12px 24px; 
-            background-color: #FCC419; 
-            color: #fff; 
+            padding: 12px 24px;
+            background-color: #FCC419;
+            color: #fff;
             border: none;
             border-radius: 8px;
             font-size: 1.2rem;
@@ -63,48 +90,52 @@
         }
 
         #btn-reserve:hover {
-            background-color: #e0ac22; 
+            background-color: #e0ac22;
         }
 
         p.section-intro {
-            font-weight: 600; 
+            font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: #333; 
+            color: #333;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .container {
             width: 90%;
             margin: 0 auto;
             padding: 20px;
-            background-color: #fff; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
         }
 
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            margin-top: 20px; 
+            margin-top: 20px;
         }
 
         .gallery div {
             text-align: center;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f7f7f7;
         }
 
         .gallery div:hover {
-            transform: translateY(-5px); 
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .gallery img {
             max-width: 100%;
-            border-radius: 8px; 
+            border-radius: 8px;
             margin-top: 20px;
         }
 
@@ -113,14 +144,14 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 30px; 
+            margin-top: 30px;
         }
 
         .social-icons img {
             padding: 10px;
-            border-radius: 50%; 
-            background-color: #FCC419; 
-            transition: transform 0.3s ease; 
+            border-radius: 50%;
+            background-color: #FCC419;
+            transition: transform 0.3s ease;
         }
 
         .social-icons img:hover {
@@ -130,15 +161,14 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(50px); 
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0); 
+                transform: translateY(0);
             }
         }
 
-        
         @keyframes fadeOut {
             from {
                 opacity: 1;
@@ -146,17 +176,15 @@
             }
             to {
                 opacity: 0;
-                transform: translateY(-50px); 
+                transform: translateY(-50px);
             }
         }
 
-        
         section {
             opacity: 0;
-            animation-fill-mode: both; 
+            animation-fill-mode: both;
         }
 
-       
         section {
             transition: opacity 0.5s ease-in-out;
         }
@@ -167,60 +195,55 @@
         <?php include("components/header.php")?>
     </header>
 
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
     <section id="home">
         <p class="heading">No More Waiting</p>
         <h1 class="sub">Parking Slot is in Your Fingers</h1>
         <button id="btn-reserve" onclick="window.location.href='reserve.php';">Reserve Your Parking</button>
-        <a href="">Already Reserved parking</a>
+        <a href="" style="color: #FCC419; margin-top: 15px; display: inline-block;">Already Reserved parking</a>
     </section>
 
     <section id="services">
         <div class="container">
-            <header class="sub">
-                <h3>Our Services</h3>
-                <div class="gallery">
-                    <div>
-                      <h4>Security</h4>
-                        <img src="images/security.png" alt="Service 1">
-                        <p>The Kandy Municipal Council ensures public car park security through CCTV surveillance, adequate lighting, and presence of security personnel. Entry controls and regular maintenance further enhance safety. These measures create a secure environment, instilling confidence in users and encouraging the utilization of the public parking facilities.</p>
-                    </div>
-                    <div>
-                      <h4>Time Saving</h4>
-                        <img src="images/time.png" alt="Service 2">
-                        <p>The Kandy Municipal Council employs an online reservation system for its public car parks, revolutionizing the parking experience. Motorists can now effortlessly book parking spaces in advance, eliminating the hassle of searching upon arrival. This technological advancement not only streamlines parking but also optimizes space usage, reducing congestion and saving valuable time for both drivers and attendants.</p>
-                    </div>
-                    <div>
-                      <h4>Easy to Use</h4>
-                        <img src="images/easy.png" alt="Service 3">
-                        <p>The Kandy Municipal Council's public car park introduces an easy-to-use feature, allowing motorists to navigate effortlessly. With clear signage, intuitive layout, and user-friendly payment options, the system ensures a seamless parking experience. This simplicity enhances convenience for visitors, promoting efficient use of the facilities while saving time and effort.</p>
-                    </div>
+            <p class="section-intro">Our Services</p>
+            <div class="gallery">
+                <div>
+                    <h4>Security</h4>
+                    <img src="images/security.png" alt="Service 1">
+                    <p>The Kandy Municipal Council ensures public car park security through CCTV surveillance, adequate lighting, and presence of security personnel. Entry controls and regular maintenance further enhance safety. These measures create a secure environment, instilling confidence in users and encouraging the utilization of the public parking facilities.</p>
                 </div>
-            </header>
+                <div>
+                    <h4>Time Saving</h4>
+                    <img src="images/time.png" alt="Service 2">
+                    <p>The Kandy Municipal Council employs an online reservation system for its public car parks, revolutionizing the parking experience. Motorists can now effortlessly book parking spaces in advance, eliminating the hassle of searching upon arrival. This technological advancement not only streamlines parking but also optimizes space usage, reducing congestion and saving valuable time for both drivers and attendants.</p>
+                </div>
+                <div>
+                    <h4>Easy to Use</h4>
+                    <img src="images/easy.png" alt="Service 3">
+                    <p>The Kandy Municipal Council's public car park introduces an easy-to-use feature, allowing motorists to navigate effortlessly. With clear signage, intuitive layout, and user-friendly payment options, the system ensures a seamless parking experience. This simplicity enhances convenience for visitors, promoting efficient use of the facilities while saving time and effort.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="about">
         <div class="container">
-            <header class="sub">
-                <h3>About Us</h3>
-                <p class="para">Welcome to Kandy Municipal Council Public Car Parks, where convenience meets security in the heart of Kandy. Our mission is to offer safe, affordable, and well-maintained parking solutions for residents, visitors, and businesses alike. With strategically located facilities, competitive rates, and a commitment to cleanliness and accessibility, we strive to enhance your experience of exploring our historic city. Choose us for reliable parking, leaving you free to enjoy all that Kandy has to offer with peace of mind.</p>
-            </header>
+            <p class="section-intro">About Us</p>
+            <p>Welcome to Kandy Municipal Council Public Car Parks, where convenience meets security in the heart of Kandy. Our mission is to offer safe, affordable, and well-maintained parking solutions for residents, visitors, and businesses alike. With strategically located facilities, competitive rates, and a commitment to cleanliness and accessibility, we strive to enhance your experience of exploring our historic city. Choose us for reliable parking, leaving you free to enjoy all that Kandy has to offer with peace of mind.</p>
         </div>
     </section>
 
     <section id="contact">
         <div class="container">
-            <header class="sub">
-                <p class="section-intro">Contact Us</p>
-                <p><b>Address: </b> Kandy city car park, Kandy <br>
-                    <b>Phone: </b>0812 922 321</p>
-
-            </header>
-            <!-- <ul class="social-icons">
-                <li><a href="#"><img src="path/to/image1.jpg" alt="icon1"></a>example2</li>
-                <li><a href="#"><img src="path/to/image2.jpg" alt="icon2"></a>example3</li>
-                <li><a href="#"><img src="path/to/image3.jpg" alt="icon3"></a>example4</li>
-            </ul> -->
+            <p class="section-intro">Contact Us</p>
+            <p><b>Address:</b> Kandy city car park, Kandy<br>
+            <b>Phone:</b> 0812 922 321</p>
         </div>
     </section>
 
@@ -250,17 +273,13 @@
                 });
             }
 
-            
             fadeInElements();
 
-            
             document.addEventListener("scroll", function() {
                 fadeInElements();
                 fadeOutElements();
             });
         });
-
-
     </script>
 </body>
 </html>
