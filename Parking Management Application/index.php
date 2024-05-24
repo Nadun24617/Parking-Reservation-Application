@@ -32,28 +32,6 @@
             text-align: center;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            background: #444;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #FFD700;
-        }
-
         #home {
             background-image: url('images/background.jpg');
             background-size: cover;
@@ -127,18 +105,28 @@
             background: linear-gradient(145deg, #ff5722, #ff7043);
         }
 
-        p.section-intro {
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #555;
-            margin-bottom: 20px;
+        section {
+            padding: 60px 20px;
             text-align: center;
         }
 
+        section:nth-of-type(odd) {
+            background: #fff;
+        }
+
+        section:nth-of-type(even) {
+            background: #f9f9f9;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
         .container {
-            width: 90%;
-            margin: 40px auto;
+            width: 80%;
+            margin: 0 auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -208,13 +196,43 @@
             }
         }
 
-        section {
-            opacity: 0;
+        .fade-in {
             animation: fadeIn 1s forwards;
         }
 
-        .fade-in {
-            animation: fadeIn 1s forwards;
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .service-item img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .service-item h4 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .service-item p {
+            font-size: 1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-details {
+            font-size: 1.1rem;
+            color: #555;
         }
     </style>
 </head>
@@ -223,6 +241,7 @@
         <?php include("components/header.php")?>
     </header>
 
+    
     <section id="home">
         <p class="heading">No More Waiting</p>
         <h1 class="sub">Parking Slot is in Your Fingers</h1>
@@ -231,22 +250,22 @@
     </section>
 
     <section id="services" class="fade-in">
+        <h2 class="section-heading">Our Services</h2>
         <div class="container">
-            <p class="section-intro">Our Services</p>
             <div class="gallery">
-                <div>
+                <div class="service-item">
+                    <img src="images/security.png" alt="Security Service">
                     <h4>Security</h4>
-                    <img src="images/security.png" alt="Service 1">
                     <p>The Kandy Municipal Council ensures public car park security through CCTV surveillance, adequate lighting, and presence of security personnel. Entry controls and regular maintenance further enhance safety. These measures create a secure environment, instilling confidence in users and encouraging the utilization of the public parking facilities.</p>
                 </div>
-                <div>
+                <div class="service-item">
+                    <img src="images/time.png" alt="Time Saving Service">
                     <h4>Time Saving</h4>
-                    <img src="images/time.png" alt="Service 2">
                     <p>The Kandy Municipal Council employs an online reservation system for its public car parks, revolutionizing the parking experience. Motorists can now effortlessly book parking spaces in advance, eliminating the hassle of searching upon arrival. This technological advancement not only streamlines parking but also optimizes space usage, reducing congestion and saving valuable time for both drivers and attendants.</p>
                 </div>
-                <div>
+                <div class="service-item">
+                    <img src="images/easy.png" alt="Easy to Use Service">
                     <h4>Easy to Use</h4>
-                    <img src="images/easy.png" alt="Service 3">
                     <p>The Kandy Municipal Council's public car park introduces an easy-to-use feature, allowing motorists to navigate effortlessly. With clear signage, intuitive layout, and user-friendly payment options, the system ensures a seamless parking experience. This simplicity enhances convenience for visitors, promoting efficient use of the facilities while saving time and effort.</p>
                 </div>
             </div>
@@ -254,17 +273,17 @@
     </section>
 
     <section id="about" class="fade-in">
-        <div class="container">
-            <p class="section-intro">About Us</p>
+        <h2 class="section-heading">About Us</h2>
+        <div class="container section-content">
             <p>Welcome to Kandy Municipal Council Public Car Parks, where convenience meets security in the heart of Kandy. Our mission is to offer safe, affordable, and well-maintained parking solutions for residents, visitors, and businesses alike. With strategically located facilities, competitive rates, and a commitment to cleanliness and accessibility, we strive to enhance your experience of exploring our historic city. Choose us for reliable parking, leaving you free to enjoy all that Kandy has to offer with peace of mind.</p>
         </div>
     </section>
 
     <section id="contact" class="fade-in">
-        <div class="container">
-            <p class="section-intro">Contact Us</p>
-            <p><b>Address:</b> Kandy city car park, Kandy<br>
-            <b>Phone:</b> 0812 922 321</p>
+        <h2 class="section-heading">Contact Us</h2>
+        <div class="container section-content contact-details">
+            <p><b>Address:</b> Kandy city car park, Kandy</p>
+            <p><b>Phone:</b> 0812 922 321</p>
         </div>
     </section>
 
