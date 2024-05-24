@@ -36,6 +36,11 @@
             display: flex;
             justify-content: center;
             gap: 20px;
+            background: #444;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         nav a {
@@ -188,11 +193,15 @@
         section {
             transition: opacity 0.5s ease-in-out;
         }
+
+        .fade-in {
+            animation: fadeIn 1s forwards;
+        }
     </style>
 </head>
 <body>
     <header>
-        <?php include("components/header.php")?>
+        <h1>Kandy Municipal Car Park</h1>
     </header>
 
     <nav>
@@ -209,7 +218,7 @@
         <a href="" style="color: #FCC419; margin-top: 15px; display: inline-block;">Already Reserved parking</a>
     </section>
 
-    <section id="services">
+    <section id="services" class="fade-in">
         <div class="container">
             <p class="section-intro">Our Services</p>
             <div class="gallery">
@@ -232,14 +241,14 @@
         </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="fade-in">
         <div class="container">
             <p class="section-intro">About Us</p>
             <p>Welcome to Kandy Municipal Council Public Car Parks, where convenience meets security in the heart of Kandy. Our mission is to offer safe, affordable, and well-maintained parking solutions for residents, visitors, and businesses alike. With strategically located facilities, competitive rates, and a commitment to cleanliness and accessibility, we strive to enhance your experience of exploring our historic city. Choose us for reliable parking, leaving you free to enjoy all that Kandy has to offer with peace of mind.</p>
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="fade-in">
         <div class="container">
             <p class="section-intro">Contact Us</p>
             <p><b>Address:</b> Kandy city car park, Kandy<br>
@@ -248,7 +257,7 @@
     </section>
 
     <footer>
-        <?php include("components/footer.php")?>
+        <p>&copy; 2024 Kandy Municipal Car Park. All Rights Reserved.</p>
     </footer>
 
     <script>
@@ -259,16 +268,7 @@
                 sections.forEach(function(section) {
                     var position = section.getBoundingClientRect();
                     if (position.top < window.innerHeight && position.bottom >= 0) {
-                        section.style.animation = "fadeIn 0.5s forwards";
-                    }
-                });
-            }
-
-            function fadeOutElements() {
-                sections.forEach(function(section) {
-                    var position = section.getBoundingClientRect();
-                    if (position.bottom < 0 || position.top > window.innerHeight) {
-                        section.style.animation = "fadeOut 0.5s forwards";
+                        section.classList.add("fade-in");
                     }
                 });
             }
@@ -277,7 +277,6 @@
 
             document.addEventListener("scroll", function() {
                 fadeInElements();
-                fadeOutElements();
             });
         });
     </script>
