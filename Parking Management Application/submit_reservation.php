@@ -1,7 +1,6 @@
 <?php
 session_start(); // Start the session
 
-
 $servername = "localhost"; 
 $username = "root"; 
 $password = ""; 
@@ -9,7 +8,6 @@ $dbname = "parking reservation system";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -22,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $vehicle_number = $_POST["vehicle_number"];
     $customer_name = $_POST["customer_name"];
     $mobile_number = $_POST["mobile_number"];
+    $email_address = $_POST["email_address"]; // Add this line
     $vehicle_type = $_POST["vehicle_type"];
 
     // Calculate parking slot number
@@ -33,8 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $parking_slot = ($total_reservations % 100) + 1; // Assuming 100 parking spaces numbered 1 to 100
 
         // Save the reservation to the database
-        $sql = "INSERT INTO reservations (vehicle_number, customer_name, mobile_number, vehicle_type, slot_number) 
-                VALUES ('$vehicle_number', '$customer_name', '$mobile_number', '$vehicle_type', '$parking_slot')";
+        $sql = "INSERT INTO reservations (vehicle_number, customer_name, mobile_number, email_address, vehicle_type, slot_number) 
+                VALUES ('$vehicle_number', '$customer_name', '$mobile_number', '$email_address', '$vehicle_type', '$parking_slot')";
 
         if ($conn->query($sql) === TRUE) {
             // Set response data
