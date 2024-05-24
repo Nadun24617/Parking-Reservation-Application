@@ -171,6 +171,7 @@
         <p class="heading">No More Waiting</p>
         <h1 class="sub">Parking Slot is in Your Fingers</h1>
         <button id="btn-reserve" onclick="window.location.href='reserve.php';">Reserve Your Parking</button>
+        <a href="">Already Reserved parking</a>
     </section>
 
     <section id="services">
