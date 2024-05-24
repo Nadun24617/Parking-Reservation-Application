@@ -16,6 +16,7 @@
 
         html {
             font-size: 16px;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -53,11 +54,13 @@
             margin-top: 0;
             color: #FFD700;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: slideIn 2s ease-out;
         }
 
         h1.sub {
             margin-top: 20px;
             color: #fff;
+            animation: slideIn 2s ease-out;
         }
 
         .btn {
@@ -106,8 +109,9 @@
         }
 
         section {
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
+            transition: padding 0.3s ease-in-out;
         }
 
         section:nth-of-type(odd) {
@@ -122,6 +126,9 @@
             font-size: 2.5rem;
             margin-bottom: 20px;
             color: #333;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
         .container {
@@ -185,6 +192,17 @@
             transform: scale(1.2);
         }
 
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -203,6 +221,9 @@
         .section-content {
             max-width: 800px;
             margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
         .service-item {
@@ -234,6 +255,11 @@
             font-size: 1.1rem;
             color: #555;
         }
+
+        .in-view .section-heading, .in-view .section-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -241,7 +267,7 @@
         <?php include("components/header.php")?>
     </header>
 
-    
+
     <section id="home">
         <p class="heading">No More Waiting</p>
         <h1 class="sub">Parking Slot is in Your Fingers</h1>
@@ -249,9 +275,9 @@
         <button class="btn btn-secondary" onclick="window.location.href='already_reserved.php';">Already Reserved Parking</button>
     </section>
 
-    <section id="services" class="fade-in">
+    <section id="services">
         <h2 class="section-heading">Our Services</h2>
-        <div class="container">
+        <div class="container section-content">
             <div class="gallery">
                 <div class="service-item">
                     <img src="images/security.png" alt="Security Service">
@@ -272,14 +298,14 @@
         </div>
     </section>
 
-    <section id="about" class="fade-in">
+    <section id="about">
         <h2 class="section-heading">About Us</h2>
         <div class="container section-content">
             <p>Welcome to Kandy Municipal Council Public Car Parks, where convenience meets security in the heart of Kandy. Our mission is to offer safe, affordable, and well-maintained parking solutions for residents, visitors, and businesses alike. With strategically located facilities, competitive rates, and a commitment to cleanliness and accessibility, we strive to enhance your experience of exploring our historic city. Choose us for reliable parking, leaving you free to enjoy all that Kandy has to offer with peace of mind.</p>
         </div>
     </section>
 
-    <section id="contact" class="fade-in">
+    <section id="contact">
         <h2 class="section-heading">Contact Us</h2>
         <div class="container section-content contact-details">
             <p><b>Address:</b> Kandy city car park, Kandy</p>
@@ -299,7 +325,7 @@
                 sections.forEach(function(section) {
                     var position = section.getBoundingClientRect();
                     if (position.top < window.innerHeight && position.bottom >= 0) {
-                        section.classList.add("fade-in");
+                        section.classList.add("in-view");
                     }
                 });
             }
