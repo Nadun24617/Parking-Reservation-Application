@@ -126,6 +126,12 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         .gallery {
@@ -185,24 +191,9 @@
             }
         }
 
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-        }
-
         section {
             opacity: 0;
-            animation-fill-mode: both;
-        }
-
-        section {
-            transition: opacity 0.5s ease-in-out;
+            animation: fadeIn 1s forwards;
         }
 
         .fade-in {
@@ -212,15 +203,8 @@
 </head>
 <body>
     <header>
-        <h1>Kandy Municipal Car Park</h1>
+        <?php include("components/header.php")?>
     </header>
-
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
-    </nav>
 
     <section id="home">
         <p class="heading">No More Waiting</p>
@@ -268,7 +252,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 Kandy Municipal Car Park. All Rights Reserved.</p>
+         <?php include("components/footer.php")?>
     </footer>
 
     <script>
