@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_email'] = $user['email']; // Store email in session
             if ($_POST['redirect'] == 'reserve') {
                 header('Location: reserve.php');
             } else {
@@ -55,15 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <style>
         body {
             background: #fff;
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
         .container {
             max-width: 400px;
-            margin: auto;
+            margin-top: 100px;
             padding: 30px;
             background: #fff;
             border-radius: 15px;
@@ -112,69 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        header, footer {
-            width: 100%;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-        header {
-            top: 0;
-            background: #333;
-            color: #fff;
-            position: sticky;
-            padding: 10px 0;
-            text-align: center;
-        }
-        footer {
-            bottom: 0;
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-        }
-        .btn-reserve, .btn-login {
-            margin-top: 20px;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            background: #007bff;
-            color: #fff;
-        }
-        .btn-reserve::before, .btn-login::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.15);
-            transition: all 0.5s ease;
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-        }
-        .btn-reserve:hover::before, .btn-login:hover::before {
-            transform: translate(-50%, -50%) scale(1);
-        }
-        .btn-reserve:hover, .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-        }
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
-        }
-        @media (max-width: 480px) {
-            .container {
-                width: 95%;
-            }
         }
     </style>
 </head>
