@@ -54,55 +54,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            /* background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); */
-            /* font-family: 'Nunito', sans-serif; */
-            color: #fff;
+            background: #fff;
+            font-family: 'Nunito', sans-serif;
+            color: #333;
         }
         .container {
-            max-width: 600px;
-            margin: 100px auto 50px;
+            max-width: 400px;
+            margin-top: 100px;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
+            background: #fff;
             border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-in-out;
         }
         .form-group {
             margin-bottom: 1.5rem;
         }
         .form-control {
-            background: rgba(255, 255, 255, 0.2);
+            background: #f4f4f4;
             border: none;
             border-radius: 10px;
             padding: 10px 15px;
-            color: #fff;
         }
         .form-control::placeholder {
-            color: #ddd;
+            color: #aaa;
         }
         .btn-primary, .btn-secondary {
-            background: linear-gradient(145deg, #32a852, #28b485);
+            background: #007bff;
             border: none;
             transition: background-color 0.3s, transform 0.3s;
             border-radius: 50px;
             padding: 10px 30px;
+            color: #fff;
         }
         .btn-primary:hover, .btn-secondary:hover {
-            background: linear-gradient(145deg, #288942, #218c63);
+            background: #0056b3;
             transform: translateY(-2px);
         }
         .nav-tabs .nav-link.active {
-            background-color: #32a852;
+            background-color: #007bff;
             color: #fff;
             border-radius: 10px 10px 0 0;
         }
         .nav-tabs .nav-link {
-            color: #fff;
+            color: #007bff;
             transition: color 0.3s;
         }
         .nav-tabs .nav-link:hover {
-            color: #28b485;
+            color: #0056b3;
         }
         .alert {
             margin-top: 20px;
@@ -120,14 +119,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         header {
             top: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: #333;
+            color: #fff;
         }
         footer {
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-        }
-        footer p {
-            margin: 10px 0;
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
         }
         .nav-item a {
             color: #fff;
@@ -136,8 +136,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             transition: all 0.3s;
         }
         .nav-item a:hover {
-            background: #28b485;
+            background: #007bff;
             border-radius: 50px;
+        }
+        .btn-reserve, .btn-login {
+            margin-top: 20px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background: #007bff;
+            color: #fff;
+        }
+        .btn-reserve::before, .btn-login::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.5s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+        }
+        .btn-reserve:hover::before, .btn-login:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .btn-reserve:hover, .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
