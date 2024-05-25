@@ -53,7 +53,124 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Login or Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Your existing CSS styles for the form */
+        body {
+            background: #fff;
+            font-family: 'Nunito', sans-serif;
+            color: #333;
+        }
+        .container {
+            max-width: 400px;
+            margin-top: 100px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-control {
+            background: #f4f4f4;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 15px;
+        }
+        .form-control::placeholder {
+            color: #aaa;
+        }
+        .btn-primary, .btn-secondary {
+            background: #007bff;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 50px;
+            padding: 10px 30px;
+            color: #fff;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+        }
+        .nav-tabs .nav-link {
+            color: #007bff;
+            transition: color 0.3s;
+        }
+        .nav-tabs .nav-link:hover {
+            color: #0056b3;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        header, footer {
+            width: 100%;
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        header {
+            top: 0;
+            background: #333;
+            color: #fff;
+        }
+        footer {
+            bottom: 0;
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .nav-item a {
+            color: #fff;
+            font-weight: bold;
+            padding: 15px 20px;
+            transition: all 0.3s;
+        }
+        .nav-item a:hover {
+            background: #007bff;
+            border-radius: 50px;
+        }
+        .btn-reserve, .btn-login {
+            margin-top: 20px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background: #007bff;
+            color: #fff;
+        }
+        .btn-reserve::before, .btn-login::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.5s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+        }
+        .btn-reserve:hover::before, .btn-login:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .btn-reserve:hover, .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -68,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php if ($success): ?>
             <div class="alert alert-success"><?php echo $success; ?></div>
         <?php endif; ?>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="true">Register</a>
             </li>
@@ -106,7 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" class="form-control" required>
                     </div>
-                    <button type="submit" name="login" class="btn btn-primary btn-block">Login</button>
+                    <button type="submit" name="login" class="btn btn-secondary btn-block">Login</button>
                 </form>
             </div>
         </div>

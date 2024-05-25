@@ -33,6 +33,13 @@
             text-align: center;
         }
 
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
         #home {
             background-image: url('images/background.jpg');
             background-size: cover;
@@ -259,6 +266,52 @@
         .in-view .section-heading, .in-view .section-content {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            .heading {
+                font-size: 3rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+
+            .section-heading {
+                font-size: 2rem;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 12px;
+            }
+
+            .heading {
+                font-size: 2.5rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+
+            .section-heading {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                width: 95%;
+            }
         }
     </style>
 </head>
