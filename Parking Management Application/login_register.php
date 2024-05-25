@@ -57,10 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: #fff;
             font-family: 'Nunito', sans-serif;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .container {
             max-width: 400px;
-            margin-top: 100px;
+            margin: auto;
             padding: 30px;
             background: #fff;
             border-radius: 15px;
@@ -112,7 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         header, footer {
             width: 100%;
-            position: fixed;
             left: 0;
             right: 0;
             z-index: 1000;
@@ -121,6 +123,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             top: 0;
             background: #333;
             color: #fff;
+            position: sticky;
+            padding: 10px 0;
+            text-align: center;
         }
         footer {
             bottom: 0;
@@ -128,16 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #fff;
             text-align: center;
             padding: 10px 0;
-        }
-        .nav-item a {
-            color: #fff;
-            font-weight: bold;
-            padding: 15px 20px;
-            transition: all 0.3s;
-        }
-        .nav-item a:hover {
-            background: #007bff;
-            border-radius: 50px;
         }
         .btn-reserve, .btn-login {
             margin-top: 20px;
@@ -170,6 +165,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .btn-reserve:hover, .btn-login:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
         }
     </style>
 </head>
