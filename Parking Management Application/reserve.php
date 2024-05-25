@@ -6,7 +6,6 @@
     <title>Reserve Parking</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        
         * {
             box-sizing: border-box;
             padding: 0;
@@ -21,12 +20,10 @@
             line-height: 1.6;
             color: rgb(60, 58, 71);
             background-color: #f9f9f9; 
-        
             background-image: url('images/reserve-background.jpg');
             background-size: cover; 
             background-repeat: no-repeat; 
             background-position: center;
-        
         }
 
         main {
@@ -57,6 +54,7 @@
         }
 
         form input[type="text"],
+        form input[type="email"], /* Add this line */
         form select {
             width: 100%;
             padding: 10px;
@@ -67,6 +65,7 @@
         }
 
         form input[type="text"]:focus,
+        form input[type="email"]:focus, /* Add this line */
         form select:focus {
             outline: none;
             border-color: #FCC419; 
@@ -107,6 +106,10 @@
             <div class="form-group">
                 <label for="mobile_number">Mobile Number:</label>
                 <input type="text" class="form-control" id="mobile_number" name="mobile_number" required>
+            </div>
+            <div class="form-group">
+                <label for="email_address">Email Address:</label>
+                <input type="email" class="form-control" id="email_address" name="email_address" required>
             </div>
             <div class="form-group">
                 <label for="vehicle_type">Vehicle Type:</label>

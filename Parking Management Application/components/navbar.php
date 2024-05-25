@@ -16,21 +16,66 @@
       margin: 0;
     }
 
-    html{
-            font-size: 18px;
+    html {
+      font-size: 18px;
     }
-    body{
+
+    body {
       font-family: 'Poppins', sans-serif;
     }
+
+    .navbar {
+      background-color: #333;
+      transition: background-color 0.3s ease;
+    }
+
     .navbar-brand {
-      font-size: 20px;
+      font-size: 1.5rem;
       font-weight: bold;
-      color: orange;
+      color: #FCC419;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-brand img {
+      margin-right: 10px;
+    }
+
+    .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #FCC419 !important;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28%255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    .nav-item {
+      margin: 0 10px;
+    }
+
+    @media (max-width: 992px) {
+      .navbar-nav {
+        text-align: center;
+      }
+
+      .nav-item {
+        margin: 5px 0;
+      }
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="images/carpark.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
@@ -42,7 +87,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#services">Services</a>
@@ -57,7 +102,7 @@
       </div>
     </div>
   </nav>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
