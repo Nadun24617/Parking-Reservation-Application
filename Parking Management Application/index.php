@@ -277,21 +277,38 @@
     <section id="services">
         <h2 class="section-heading">Our Services</h2>
         <div class="container section-content">
-            <!-- Services content -->
+            <div class="gallery">
+                <div class="service-item">
+                    <img src="images/security.png" alt="Security Service">
+                    <h4>Security</h4>
+                    <p>The Kandy Municipal Council ensures public car park security through CCTV surveillance, adequate lighting, and presence of security personnel. Entry controls and regular maintenance further enhance safety. These measures create a secure environment, instilling confidence in users and encouraging the utilization of the public parking facilities.</p>
+                </div>
+                <div class="service-item">
+                    <img src="images/time.png" alt="Time Saving Service">
+                    <h4>Time Saving</h4>
+                    <p>The Kandy Municipal Council employs an online reservation system for its public car parks, revolutionizing the parking experience. Motorists can now effortlessly book parking spaces in advance, eliminating the hassle of searching upon arrival. This technological advancement not only streamlines parking but also optimizes space usage, reducing congestion and saving valuable time for both drivers and attendants.</p>
+                </div>
+                <div class="service-item">
+                    <img src="images/easy.png" alt="Easy to Use Service">
+                    <h4>Easy to Use</h4>
+                    <p>The Kandy Municipal Council's public car park introduces an easy-to-use feature, allowing motorists to navigate effortlessly. With clear signage, intuitive layout, and user-friendly payment options, the system ensures a seamless parking experience. This simplicity enhances convenience for visitors, promoting efficient use of the facilities while saving time and effort.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="about">
         <h2 class="section-heading">About Us</h2>
         <div class="container section-content">
-            <!-- About content -->
+            <p>Welcome to Kandy Municipal Council Public Car Parks, where convenience meets security in the heart of Kandy. Our mission is to offer safe, affordable, and well-maintained parking solutions for residents, visitors, and businesses alike. With strategically located facilities, competitive rates, and a commitment to cleanliness and accessibility, we strive to enhance your experience of exploring our historic city. Choose us for reliable parking, leaving you free to enjoy all that Kandy has to offer with peace of mind.</p>
         </div>
     </section>
 
     <section id="contact">
         <h2 class="section-heading">Contact Us</h2>
         <div class="container section-content contact-details">
-            <!-- Contact details -->
+            <p><b>Address:</b> Kandy city car park, Kandy</p>
+            <p><b>Phone:</b> 0812 922 321</p>
         </div>
     </section>
 
@@ -300,7 +317,24 @@
     </footer>
 
     <script>
-        // Your existing JS scripts
+        document.addEventListener("DOMContentLoaded", function() {
+            var sections = document.querySelectorAll("section");
+
+            function fadeInElements() {
+                sections.forEach(function(section) {
+                    var position = section.getBoundingClientRect();
+                    if (position.top < window.innerHeight && position.bottom >= 0) {
+                        section.classList.add("in-view");
+                    }
+                });
+            }
+
+            fadeInElements();
+
+            document.addEventListener("scroll", function() {
+                fadeInElements();
+            });
+        });
     </script>
 </body>
 </html>
