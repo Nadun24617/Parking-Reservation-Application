@@ -2,80 +2,15 @@
 session_start();
 require 'db.php';
 
-$error = '';
-$success = '';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['register'])) {
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
-
-        if ($password !== $confirm_password) {
-            $error = "Passwords do not match.";
-        } else {
-            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-            $stmt = $pdo->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
-            if ($stmt->execute([$email, $hashed_password])) {
-                $success = "Registration successful. You can now log in.";
-            } else {
-                $error = "Registration failed. Please try again.";
-            }
-        }
-    } elseif (isset($_POST['login'])) {
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $password = $_POST['password'];
-
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
-
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            header('Location: customer.php');
-            exit;
-        } else {
-            $error = "Invalid email or password.";
-        }
-    } elseif (isset($_POST['book_slot'])) {
-        if (!isset($_SESSION['user_id'])) {
-            $error = "You need to log in to book a slot.";
-        } else {
-            $vehicle_number = $_POST['vehicle_number'];
-            $customer_name = $_POST['customer_name'];
-            $mobile_number = $_POST['mobile_number'];
-            $vehicle_type = $_POST['vehicle_type'];
-            $slot_number = $_POST['slot_number'];
-            $email_address = $_POST['email_address'];
-
-            $stmt = $pdo->prepare("INSERT INTO reservations (vehicle_number, customer_name, mobile_number, vehicle_type, slot_number, email_address) VALUES (?, ?, ?, ?, ?, ?)");
-            if ($stmt->execute([$vehicle_number, $customer_name, $mobile_number, $vehicle_type, $slot_number, $email_address])) {
-                $success = "Slot booked successfully.";
-            } else {
-                $error = "Booking failed. Please try again.";
-            }
-        }
-    } elseif (isset($_POST['update_slot'])) {
-        if (!isset($_SESSION['user_id'])) {
-            $error = "You need to log in to update slot details.";
-        } else {
-            $id = $_POST['id'];
-            $vehicle_number = $_POST['vehicle_number'];
-            $customer_name = $_POST['customer_name'];
-            $mobile_number = $_POST['mobile_number'];
-            $vehicle_type = $_POST['vehicle_type'];
-            $slot_number = $_POST['slot_number'];
-            $email_address = $_POST['email_address'];
-
-            $stmt = $pdo->prepare("UPDATE reservations SET vehicle_number = ?, customer_name = ?, mobile_number = ?, vehicle_type = ?, slot_number = ?, email_address = ? WHERE id = ?");
-            if ($stmt->execute([$vehicle_number, $customer_name, $mobile_number, $vehicle_type, $slot_number, $email_address, $id])) {
-                $success = "Slot details updated successfully.";
-            } else {
-                $error = "Update failed. Please try again.";
-            }
-        }
-    }
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login_register.php?redirect=view');
+    exit;
 }
+
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT * FROM reservations WHERE email_address = (SELECT email FROM users WHERE id = ?)");
+$stmt->execute([$user_id]);
+$reservations = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Registration/Login</title>
+    <title>Customer Details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -91,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         .container {
             max-width: 600px;
-            margin-top: 100px;
+            margin-top: 50px;
             padding: 30px;
             background-color: #fff;
             border-radius: 10px;
@@ -119,90 +54,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php include("components/header.php")?>
     </header>
     <div class="container">
-        <h1 class="text-center">Customer Registration/Login</h1>
-        <?php if ($error): ?>
-            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <h1 class="text-center">Customer Details</h1>
+        <?php if (isset($_GET['success'])): ?>
+            <div class="alert alert-success">Slot booked successfully.</div>
         <?php endif; ?>
-        <?php if ($success): ?>
-            <div class="alert alert-success"><?php echo $success; ?></div>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="alert alert-danger">Booking failed. Please try again.</div>
         <?php endif; ?>
-        <?php if (!isset($_SESSION['user_id'])): ?>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="true">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="false">Login</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
-                    <form action="customer.php" method="post">
-                        <div class="form-group">
-                            <label for="email">Email Address:</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirm_password">Confirm Password:</label>
-                            <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
-                        </div>
-                        <button type="submit" name="register" class="btn btn-primary btn-block">Register</button>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="login-tab">
-                    <form action="customer.php" method="post">
-                        <div class="form-group">
-                            <label for="email">Email Address:</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" class="form-control" required>
-                        </div>
-                        <button type="submit" name="login" class="btn btn-primary btn-block">Login</button>
-                    </form>
-                </div>
-            </div>
+        <?php if (empty($reservations)): ?>
+            <p class="alert alert-warning">No reservations found.</p>
         <?php else: ?>
-            <form action="customer.php" method="post">
-                <div class="form-group">
-                    <label for="vehicle_number">Vehicle Number:</label>
-                    <input type="text" id="vehicle_number" name="vehicle_number" class="form-control" required>
+            <?php foreach ($reservations as $reservation): ?>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form action="update_reservation.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($reservation['id']); ?>">
+                            <div class="form-group">
+                                <label for="vehicle_number_<?php echo $reservation['id']; ?>">Vehicle Number:</label>
+                                <input type="text" id="vehicle_number_<?php echo $reservation['id']; ?>" name="vehicle_number" class="form-control" value="<?php echo htmlspecialchars($reservation['vehicle_number']); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer_name_<?php echo $reservation['id']; ?>">Customer Name:</label>
+                                <input type="text" id="customer_name_<?php echo $reservation['id']; ?>" name="customer_name" class="form-control" value="<?php echo htmlspecialchars($reservation['customer_name']); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile_number_<?php echo $reservation['id']; ?>">Mobile Number:</label>
+                                <input type="text" id="mobile_number_<?php echo $reservation['id']; ?>" name="mobile_number" class="form-control" value="<?php echo htmlspecialchars($reservation['mobile_number']); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicle_type_<?php echo $reservation['id']; ?>">Vehicle Type:</label>
+                                <input type="text" id="vehicle_type_<?php echo $reservation['id']; ?>" name="vehicle_type" class="form-control" value="<?php echo htmlspecialchars($reservation['vehicle_type']); ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="slot_number_<?php echo $reservation['id']; ?>">Slot Number:</label>
+                                <input type="text" id="slot_number_<?php echo $reservation['id']; ?>" name="slot_number" class="form-control" value="<?php echo htmlspecialchars($reservation['slot_number']); ?>" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_address_<?php echo $reservation['id']; ?>">Email Address:</label>
+                                <input type="email" id="email_address_<?php echo $reservation['id']; ?>" name="email_address" class="form-control" value="<?php echo htmlspecialchars($reservation['email_address']); ?>" required>
+                            </div>
+                            <button type="submit" name="update_slot" class="btn btn-primary btn-block">Update Slot</button>
+                            <a href="delete_reservation.php?id=<?php echo $reservation['id']; ?>" class="btn btn-danger btn-block mt-2">Delete Slot</a>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="customer_name">Customer Name:</label>
-                    <input type="text" id="customer_name" name="customer_name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="mobile_number">Mobile Number:</label>
-                    <input type="text" id="mobile_number" name="mobile_number" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="vehicle_type">Vehicle Type:</label>
-                    <input type="text" id="vehicle_type" name="vehicle_type" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="slot_number">Slot Number:</label>
-                    <input type="text" id="slot_number" name="slot_number" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="email_address">Email Address:</label>
-                    <input type="email" id="email_address" name="email_address" class="form-control" required>
-                </div>
-                <button type="submit" name="book_slot" class="btn btn-primary btn-block">Book Slot</button>
-            </form>
+            <?php endforeach; ?>
         <?php endif; ?>
     </div>
     <footer>
         <?php include("components/footer.php")?>
     </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
