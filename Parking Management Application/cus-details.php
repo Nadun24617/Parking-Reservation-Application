@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
-            header('Location: customer.php');
+            header('Location: cus-details.php');
             exit;
         } else {
             $error = "Invalid email or password.";
@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
-                    <form action="customer.php" method="post">
+                    <form action="cus-details.php" method="post">
                         <div class="form-group">
                             <label for="email">Email Address:</label>
                             <input type="email" id="email" name="email" class="form-control" required>
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </form>
                 </div>
                 <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="login-tab">
-                    <form action="customer.php" method="post">
+                    <form action="cus-details.php" method="post">
                         <div class="form-group">
                             <label for="email">Email Address:</label>
                             <input type="email" id="email" name="email" class="form-control" required>
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         <?php else: ?>
-            <form action="customer.php" method="post">
+            <form action="cus-details.php" method="post">
                 <div class="form-group">
                     <label for="vehicle_number">Vehicle Number:</label>
                     <input type="text" id="vehicle_number" name="vehicle_number" class="form-control" required>
