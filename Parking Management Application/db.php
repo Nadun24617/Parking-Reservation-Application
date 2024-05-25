@@ -1,14 +1,13 @@
 <?php
-// db.php
-$host = 'localhost';
-$db = 'parking_reservation';
-$user = 'root'; // Use your database username
-$pass = ''; // Use your database password
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+$dbname = "parking reservation system";
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Could not connect to the database $db :" . $e->getMessage());
+    die("Connection failed: " . $e->getMessage());
 }
 ?>

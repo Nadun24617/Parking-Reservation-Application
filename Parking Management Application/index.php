@@ -267,12 +267,11 @@
         <?php include("components/header.php")?>
     </header>
 
-
     <section id="home">
         <p class="heading">No More Waiting</p>
         <h1 class="sub">Parking Slot is in Your Fingers</h1>
-        <button class="btn" onclick="window.location.href='reserve.php';">Reserve Your Parking</button>
-        <button class="btn btn-secondary" onclick="window.location.href='cus-login.php';">Already Reserved Parking</button>
+        <button class="btn" onclick="window.location.href='cus-details.php';">Reserve Your Parking</button>
+        <button class="btn btn-secondary" onclick="window.location.href='cus-details.php';">Already Reserved Parking</button>
     </section>
 
     <section id="services">

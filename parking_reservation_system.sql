@@ -47,6 +47,11 @@ CREATE TABLE `users` (
   `password` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- Example hashed password (use password_hash('yourpassword', PASSWORD_BCRYPT) in PHP to generate)
+INSERT INTO `users` (`email`, `password`) VALUES
+('test@example.com', '$2y$10$eW5Wc5VOM5m2oWx5Wm1wZ.vZ9F0t9GfpTkItZJ/2/j1zM1FXplU5G'); -- 'password123' hashed
+
+
 --
 -- Dumping data for table `reservations`
 --
@@ -60,9 +65,6 @@ INSERT INTO `reservations` (`id`, `vehicle_number`, `customer_name`, `mobile_num
 
 -- Note: Use PHP or another method to generate a hashed password.
 -- Example: password_hash('password123', PASSWORD_BCRYPT);
-
-INSERT INTO `users` (`email`, `password`) VALUES
-('test@example.com', '$2y$10$eW5Wc5VOM5m2oWx5Wm1wZ.vZ9F0t9GfpTkItZJ/2/j1zM1FXplU5G'); -- 'password123' hashed
 
 --
 -- Indexes for dumped tables
