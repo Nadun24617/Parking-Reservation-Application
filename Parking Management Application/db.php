@@ -1,5 +1,5 @@
 <?php
-$servername = "127.0.0.1";
+$servername = "127.0.0.1"; // Use 127.0.0.1 instead of localhost for MySQL connection
 $username = "root";
 $password = "";
 $dbname = "parking reservation system";

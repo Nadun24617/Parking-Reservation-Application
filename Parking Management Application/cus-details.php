@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
+            $_SESSION['email'] = $email;
             header('Location: cus-details.php');
             exit;
         } else {
@@ -91,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         .container {
             max-width: 600px;
-            margin-top: 100px;
+            margin-top: 50px;
             padding: 30px;
             background-color: #fff;
             border-radius: 10px;
