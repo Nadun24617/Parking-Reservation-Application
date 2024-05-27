@@ -51,7 +51,7 @@ $reservations = $stmt->fetchAll();
 </head>
 <body>
     <header>
-        <?php include("components/header.php")?>
+        <?php include("components/navbar.php")?>
     </header>
     <div class="container">
         <h1 class="text-center">Customer Details</h1>
