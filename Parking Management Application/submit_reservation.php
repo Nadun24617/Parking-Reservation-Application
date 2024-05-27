@@ -22,3 +22,4 @@ if ($stmt->execute([$vehicle_number, $customer_name, $mobile_number, $vehicle_ty
     echo "Booking failed. Please try again.";
 }
 ?>
+

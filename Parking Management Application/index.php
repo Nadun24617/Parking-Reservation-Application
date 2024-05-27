@@ -452,26 +452,36 @@
 
     <section class="feedback-container">
         <div id="panel" class="panel-container">
-        <strong>How satisfied are you with our <br /> customer support performance?</strong>
-        <div class="ratings-container">
-            <div class="rating">
-            <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-17.png" alt="">
-            <small>Unhappy</small>
-            </div>
+            <strong>How satisfied are you with our <br /> customer support performance?</strong>
+            <form action="submit_review.php" method="POST">
+                <div class="ratings-container">
+                    <div class="rating">
+                        <input type="radio" id="unhappy" name="rating" value="Unhappy" required>
+                        <label for="unhappy">
+                            <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-17.png" alt="">
+                            <small>Unhappy</small>
+                        </label>
+                    </div>
 
-            <div class="rating">
-            <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-3.png" alt=""/>
-            <small>Neutral</small>
-            </div>
+                    <div class="rating">
+                        <input type="radio" id="neutral" name="rating" value="Neutral" required>
+                        <label for="neutral">
+                            <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-3.png" alt=""/>
+                            <small>Neutral</small>
+                        </label>
+                    </div>
 
-            <div class="rating active">
-            <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-30.png" alt=""/>
-            <small>Satisfied</small>
-            </div>
+                    <div class="rating active">
+                        <input type="radio" id="satisfied" name="rating" value="Satisfied" required>
+                        <label for="satisfied">
+                            <img src="https://img.icons8.com/external-neu-royyan-wijaya/64/000000/external-emoji-neumojis-smiley-neu-royyan-wijaya-30.png" alt=""/>
+                            <small>Satisfied</small>
+                        </label>
+                    </div>
+                </div>
+                <button class="btn" id="send">Send Review</button>
+            </form>
         </div>
-        <button class="btn" id="send">Send Review</button>
-        </div>
-
     </section>
 
     
@@ -501,44 +511,24 @@
             });
         });
 
-        const ratings = document.querySelectorAll('.rating')
-        const ratingsContainer = document.querySelector('.ratings-container')
-        const sendBtn = document.querySelector('#send')
-        const panel = document.querySelector('#panel')
-        let selectedRating = 'Satisfied'
+        document.getElementById('send').addEventListener('click', function() {
+            var form = document.getElementById('feedbackForm');
+            var formData = new FormData(form);
 
-        ratingsContainer.addEventListener('click', (e) => {
-            if(e.target.parentNode.classList.contains('rating') && e.target.nextElementSibling) {
-                removeActive()
-                e.target.parentNode.classList.add('active')
-                selectedRating = e.target.nextElementSibling.innerHTML
-            } else if(
-                e.target.parentNode.classList.contains('rating') &&
-                e.target.previousSibling &&
-                e.target.previousElementSibling.nodeName === 'IMG'
-            ) {
-                removeActive()
-                e.target.parentNode.classList.add('active')
-                selectedRating = e.target.innerHTML
-            }
+            // Send the form data via AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'submit_review.php', true);
+            xhr.onload = function() {
+                var response = JSON.parse(this.responseText);
+                if (response.success) {
+                    alert(response.message); // Show success message
+                } else {
+                    alert(response.message); // Show error message
+                }
+            };
+            xhr.send(formData);
+        });
 
-        })
-
-        sendBtn.addEventListener('click', (e) => {
-            panel.innerHTML = `
-                <i class="fas fa-heart"></i>
-                <strong>Thank You!</strong>
-                <br>
-                <strong>Feedback: ${selectedRating}</strong>
-                <p>We'll use your feedback to improve our customer support</p>
-            `
-        })
-
-        function removeActive() {
-            for(let i = 0; i < ratings.length; i++) {
-                ratings[i].classList.remove('active')
-            }
-        }
     </script>
 </body>
 </html>
