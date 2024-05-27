@@ -109,7 +109,7 @@
 </head>
 <body>
     <header>
-        <?php include("components/header.php")?>
+        <?php include("components/navbar.php")?>
     </header>
     <main class="container">
         <h1>Reserve Your Parking Slot</h1>
